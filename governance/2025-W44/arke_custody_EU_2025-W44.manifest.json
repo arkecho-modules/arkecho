@@ -1,0 +1,19 @@
+{
+  "week": "2025-W44",
+  "jurisdiction": "EU",
+  "created_at": "2025-10-27T21:26:08+00:00",
+  "bundle": "arke_custody_EU_2025-W44.zip",
+  "bundle_sha256": "b818ea231c63d855381ed939dbd0b12355001d4b7f3167d38e3d868a0b566ba2",
+  "entries": [
+    {
+      "file": "integrity_EU_2025-10-27T203826+0000.json",
+      "sha256": "2a9812f508a7275d6a0fb15c626d007157cfe16aa1f532c9bb29de4e0457fb19",
+      "size": 7174
+    },
+    {
+      "file": "integrity_EU_2025-10-27T205936+0000.json",
+      "sha256": "6ce90df55c92b684aeceb55a5ed7386225c64881a3ec72d1bb759aa2791e03fc",
+      "size": 7174
+    }
+  ]
+}
