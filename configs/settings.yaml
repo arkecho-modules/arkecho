@@ -1,0 +1,68 @@
+# configs/settings.yaml
+# ArkEcho v16 Mesh-aligned Guardian configuration
+# This node enforces Guardian halts for grooming/coercion, and reflects
+# mesh-approved safer thresholds. These values were human approved and
+# logged in mesh_applied_log.json. Do not weaken without custody signature.
+
+guardian:
+  enabled: true
+  jurisdiction_default: "UK"
+  log_dir: "logs/runtime"
+  audit_dir: "logs_guardian"
+  allow_offline: true
+
+  # tightened after peer safety import ("safer_only")
+  manipulation_score_cutoff: 0.12        # halt if manipulation_score >= 0.12
+  max_halt_latency_ms: 52                # Guardian must hard-stop within 52ms
+
+  empathy_floor: 0.25
+  transparency_level: "full"
+  reversibility_enabled: true
+  audit_mode: "append_only"
+  halt_on_violation: true
+
+patterns:
+  grooming_escalation:
+    risk_level: high                     # elevated to high after mesh review
+    description: "Escalating grooming / coercive isolation of a vulnerable user (minor, dependent, cognitively impaired)."
+    reversible: true
+    guardian_action: halt                # immediate stop, non-negotiable
+
+  default:
+    risk_level: medium
+    reversible: true
+    guardian_action: allow
+
+mesh:
+  enabled: true
+  outbox_dir: "mesh_outbox"
+  inbox_dir: "mesh_inbox"
+  pending_file: "mesh_pending_safety.json"
+  applied_log: "mesh_applied_log.json"
+  hmac_key_ref: "mesh_hmac_key"
+
+  peer_sync_mode: "manual"               # airgap / USB style sharing
+  auto_export_interval_hours: 24
+  max_packet_age_days: 14
+
+audit:
+  custody_log: "mesh_applied_log.json"
+  record_format: "json"
+  reversible: true
+  verification_required: true
+  guardian_signature_required: true
+
+ui:
+  safe_mode_default: true
+  log_level: "info"
+  notify_on_guardian_halt: true
+  locale: "en_GB"
+
+notes:
+  - "These thresholds (0.12 cutoff, 52ms halt) were inherited from a peer node
+     after observed grooming_escalation. Approval and merge were timestamped
+     by human operator in mesh_applied_log.json."
+  - "Direction is safer_only. You may tighten further without permission.
+     You may NOT loosen without dual-signature custody justification."
+  - "No personal / child content is ever shared between nodes. Only numeric,
+     anonymised event ghosts are exchanged."

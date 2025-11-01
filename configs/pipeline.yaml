@@ -1,0 +1,16 @@
+pipeline:
+  name: ark_pipeline
+  steps:
+    - name: load_modules
+      action: load_from_disk
+
+    - name: run_integrity_check
+      action: run_checks
+      params:
+        check_temporal: true
+        export_html: true
+
+    - name: save_results
+      action: save_to_file
+      params:
+        outdir: logs/html

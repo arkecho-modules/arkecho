@@ -1,0 +1,60 @@
+# configs/keys.yaml
+# ArkEcho v15/v16 Mesh Prep — Deployment Secrets Template (DO NOT COMMIT REAL SECRETS)
+#
+# This file is a TEMPLATE for distribution builds and CI verification.
+# Production installs MUST inject real values at runtime via environment
+# variables, local secure storage, or hardware token. Do not store
+# live credentials or live cryptographic material in version control.
+#
+# Chain-of-custody and auditors are allowed to see this file exactly
+# because it proves we are not shipping live secrets in public builds.
+
+secrets:
+  # Placeholders only — CI should enforce these are not real keys.
+  api_key: "YOUR_API_KEY_HERE"          # real value comes from env: ARKECHO_API_KEY
+  admin_token: "CHANGE_ME"              # real value comes from env: ARKECHO_ADMIN_TOKEN
+  signing_key_path: ""                  # path to deployer-managed private key (optional, local only)
+
+policy:
+  # Telemetry is OFF by default. ArkEcho does not phone home.
+  telemetry_enabled: false
+  telemetry_endpoint: ""                # must remain empty in published builds
+  telemetry_mode: "disabled"            # allowed values: disabled | local-only | explicit
+
+integrations:
+  # External hooks (optional). These MUST be injected at deploy-time, not committed.
+  audit_webhook: ""                     # env: ARKECHO_AUDIT_WEBHOOK
+  logging_url: ""                       # env: ARKECHO_LOG_URL
+  metrics_exporter: ""                  # env: ARKECHO_METRICS_EXPORTER
+
+checks:
+  # CI / custody should FAIL if any of the 'secrets' or 'mesh' values
+  # are replaced with something that looks like a real credential.
+  fail_on_non_empty_secrets: true
+
+mesh:
+  # ArkEcho Mesh (v16 pre-wire: Collective Memory Protocol)
+  #
+  # mesh_hmac_key is used to sign and verify .arkmesh packets that carry
+  # ONLY anonymised safety statistics between trusted ArkEcho nodes.
+  #
+  # This is NOT user data. This is NOT conversation data.
+  # This is NOT uploaded anywhere without an operator choosing to.
+  #
+  # All nodes in the same trust circle (school group / council / hospital network)
+  # should share the same mesh_hmac_key so they can trust each other's packets.
+  #
+  # In production, DO NOT leave this placeholder string in place.
+  # Inject a long random secret at deploy-time, e.g. via env: ARKECHO_MESH_KEY
+  # Then write it to this file on the local machine only (never in Git).
+  mesh_hmac_key: "CHANGE_ME_TO_A_LONG_RANDOM_SHARED_SECRET"
+
+  # Optionally: if you want different trust circles (e.g. council A vs council B),
+  # each circle can rotate its own mesh_hmac_key. Packets signed with an
+  # unknown/expired key will fail verification and will not ingest.
+
+notes:
+  - "This YAML is intentionally a template: no real secrets are stored in the public repo."
+  - "In production, real secrets are injected locally and kept under custody."
+  - "telemetry_enabled MUST remain false by default in Educational / public builds."
+  - "mesh_hmac_key MUST NOT be committed with a real value in public GitHub."

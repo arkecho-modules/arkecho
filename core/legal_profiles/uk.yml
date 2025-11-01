@@ -1,0 +1,6 @@
+code: UK
+name: United Kingdom
+lawful_basis: public_task
+dpia_required: true
+mou_required: true
+notes: Safeguarding/public task; DPIA strongly recommended for automated detection.

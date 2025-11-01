@@ -1,0 +1,7 @@
+# configs/pipeline.echo
+# Human-readable pipeline definition (simple DSL)
+Empathy: empathy_and_flow_controller
+Integrity: trust_governance_hub
+Reflection: constitution_and_explainability
+Temporal: new_modules.temporal_governor.run
+

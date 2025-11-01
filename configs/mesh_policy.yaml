@@ -1,0 +1,16 @@
+# ArkEcho Mesh Policy
+# Defines what kind of patterns we are willing to learn from peers
+# and how aggressively we propose to tighten.
+
+# Only consider pattern classes we recognise and are legally able to act on.
+allowed_patterns:
+  - grooming_escalation
+  - isolation_pressure
+  - elder_financial_coercion
+  - suicidal_coercion_block
+  - sexualised_boundary_push
+  - repeated_boundary_test_minor
+
+# When we see manipulation_score X from a peer,
+# we propose our local cutoff = X - manipulation_margin (never looser).
+manipulation_margin: 0.02

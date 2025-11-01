@@ -1,0 +1,10 @@
+# Minimal temporal policy for ArkEcho v13 smoke checks.
+# This file is intentionally simple and read directly (no custom DSL required).
+# Keys: quiet_windows/focus_windows as simple UTC hour ranges, legal_basis string.
+
+legal_basis: "Ethical Governance"
+quiet_windows:
+  - { start_utc_hour: 0, end_utc_hour: 6 }     # 00:00–06:00 UTC: batch non-urgent tasks
+focus_windows:
+  - { start_utc_hour: 9, end_utc_hour: 12 }    # 09:00–12:00 UTC: minimize interruptions
+  - { start_utc_hour: 13, end_utc_hour: 17 }   # 13:00–17:00 UTC: same
