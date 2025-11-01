@@ -1,0 +1,19 @@
+[Unit]
+Description=ArkEcho Guardian Sidecar
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+Group=YOUR_USERNAME
+WorkingDirectory=/path/to/ARKECHO_v15
+Environment="PATH=/path/to/ARKECHO_v15/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+Environment="OLLAMA_HOST=127.0.0.1"
+ExecStart=/path/to/ARKECHO_v15/venv/bin/python -m uvicorn service:app --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
