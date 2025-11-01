@@ -1,0 +1,12 @@
+# Core
+requests==2.32.3
+
+# Sidecar API (service.py)
+fastapi==0.120.3
+uvicorn==0.38.0
+pydantic==2.12.3
+starlette==0.49.1
+typing_extensions==4.15.0
+
+# (Optional) CLI niceties / logging if you add them later
+colorama==0.4.6
